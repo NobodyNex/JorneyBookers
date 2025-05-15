@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <title>JourneyBookers</title>
+	
+  <link rel="shortcut icon" href="favicon.png">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap4" />
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="css/tiny-slider.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>	
+	
+  <script>
+	$(document).ready(function(){
+		$("#c_tour").change(function(){
+			var selectedTour = $(this).val(); 
+			var tourPrices = {
+				"Japan package tour": 44990,
+				"Korea package tour": 48888,
+				"Vietnam package tour": 6996,
+				"France package tour": 59990,
+				"North Italy package tour": 155990,
+				"United Kingdom package tour": 89990,
+				"Germany package tour": 109900,
+				"China package tour": 45990,
+				"Switzerland package tour": 84888,
+				"India package tour": 37999,
+				"Russia package tour": 79999,
+				"Iceland package tour": 249990,				
+			};
+			var price = tourPrices[selectedTour];
+			if (price) {
+				$("#txtPrice").text(formatNumber(price) + " THB");
+			}
+		});	
+		function formatNumber(num) 
+		{
+        	return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+		}
+	
+		$("#btnDisCal").click(function(){
+			var x = $("#c_tour").val(); 
+			var y = parseFloat($("#txtPrice").text().replace(/,/g, ''));
+			var z = $("#txtUnit").val();
+			var total = y * z;
+			var discountCode = $("#discount_code").val().toLowerCase(); // รับค่าโค้ดส่วนลด
+			var disPrice = 0; 
+			if (discountCode === "welcome") {
+				disPrice = total * 0.1;
+			}
+			var gTotal = total - disPrice;    
+			$("#show1").html(x);
+			$("#show2").html(formatNumber(total) + " THB"); 
+			$("#show3").html((disPrice*-1).toLocaleString() + " THB"); 
+			$("#show4").html("<b>" + formatNumber(gTotal) + " THB<b>"); 
+		}); 
+	});
+  </script>
+	
+  </head>
+
+	<body>
+
+		<!-- Start Header/Navigation -->
+		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+
+			<div class="container">
+				<a class="navbar-brand" href="index.html">JourneyBookers<span>.</span></a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarsFurni">
+					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+						<li class="nav-item ">
+							<a class="nav-link" href="index.html">Home</a>
+						</li>
+						<li><a class="nav-link" href="booking.html">Booking</a></li>
+						<li><a class="nav-link" href="about.html">About us</a></li>
+						<li><a class="nav-link" href="services.html">Services</a></li>
+						<li><a class="nav-link" href="contact.html">Contact us</a></li>
+					</ul>
+
+					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+						<li><a class="nav-link" href="signin.html"><img src="images/user.svg"></a></li>
+						<li><a class="nav-link" href="checkout.html"><img src="images/cart.svg"></a></li>
+					</ul>
+				</div>
+			</div>
+				
+		</nav>
+		<!-- End Header/Navigation -->
+
+		<!-- Start Hero Section -->
+			<div class="hero">
+				<div class="container">
+					<div class="row justify-content-between">
+						<div class="col-lg-5">
+							<div class="intro-excerpt">
+								<h1>Booking</h1>
+							</div>
+						</div>
+						<div class="col-lg-7">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- End Hero Section -->
+
+		<div class="untree_co-section">
+		    <div class="container">
+		      <div class="row">
+		        <div class="col-md-6 mb-5 mb-md-0">
+		          <h2 class="h3 mb-3 text-black">Booking Details</h2>
+		          <div class="p-3 p-lg-5 border bg-white">
+					  
+					<div class="form-group row">
+		              <div class="col-md-12">
+		                <label for="c_fname" class="text-black">Date <span class="text-danger">*</span></label>
+		                <input type="text" class="form-control" id="txtdate" name="c_date" placeholder="dd/mm/yyyy">
+		              </div>
+					</div>
+					
+					<div class="form-group row">
+		              <div class="col-md-6">
+		                <label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
+		                <input type="text" class="form-control" id="c_fname" name="c_fname">
+		              </div>
+		              <div class="col-md-6">
+		                <label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
+		                <input type="text" class="form-control" id="c_lname" name="c_lname">
+		              </div>
+		            </div>
+
+		            <div class="form-group row">
+		              <div class="col-md-12">
+		                <label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
+		                <input type="text" class="form-control" id="c_address" name="c_address" placeholder="Street address">
+		              </div>
+		            </div>
+
+		            <div class="form-group mt-3">
+		              <input type="text" class="form-control" placeholder="Apartment, suite, unit etc. (optional)">
+		            </div>
+
+		            <div class="form-group row">
+		              <div class="col-md-6">
+		                <label for="c_state_country" class="text-black">State / Country <span class="text-danger">*</span></label>
+		                <input type="text" class="form-control" id="c_state_country" name="c_state_country">
+		              </div>
+		              <div class="col-md-6">
+		                <label for="c_postal_zip" class="text-black">Posta / Zip <span class="text-danger">*</span></label>
+		                <input type="text" class="form-control" id="c_postal_zip" name="c_postal_zip">
+		              </div>
+		            </div>
+
+		            <div class="form-group row">
+		              <div class="col-md-6">
+		                <label for="c_email_address" class="text-black">Email Address <span class="text-danger">*</span></label>
+		                <input type="text" class="form-control" id="c_email_address" name="c_email_address">
+		              </div>
+		              <div class="col-md-6">
+		                <label for="c_phone" class="text-black">Phone Number<span class="text-danger">*</span></label>
+		                <input type="text" class="form-control" id="c_phone" name="c_phone">
+		              </div>
+		            </div>  
+					  
+					<br><br>
+					   
+		            <div class="form-group">
+		              <label for="c_country" class="text-black">Package tour<span class="text-danger">*</span></label>
+		              <select id="c_tour" class="form-control">
+		                <option value="Select a package tour">Select a package tour</option>    
+		                <option value="Japan package tour">Japan package tour</option>    
+		                <option value="Korea package tour">Korea package tour</option>    
+		                <option value="Vietnam package tour">Vietnam package tour</option>    
+		                <option value="France package tour">France package tour</option>    
+		                <option value="North Italy package tour">North Italy package tour</option>    
+		                <option value="United Kingdom package tou">United Kingdom package tour</option>    
+		                <option value="Germany package tour">Germany package tour</option>
+						<option value="China package tour">China package tour</option>
+						<option value="Switzerland package tour">Switzerland package tour</option>
+						<option value="India package tour">India package tour</option><option value="Russia package tour">Russia package tour</option><option value="Iceland package tour">Iceland package tour</option>						  
+		              </select>
+		            </div>
+					  
+		            <div class="form-group row">
+		              <div class="col-md-6">
+		                <label for="c_price" class="text-black">Price</label>
+						<span id="txtPrice" class="form-control"> </span>
+		              </div>
+		              <div class="col-md-6">
+		                <label for="c_lname" class="text-black">Amount <span class="text-danger">*</span></label>
+		                <input type="text" class="form-control" id="txtUnit" name="c_unit" placeholder="example : 4">
+		              </div>
+		            </div>	
+					  
+					<div class="form-group row">
+						<div class="col-md-12">
+							<label for="c_address" class="text-black">Discount Code</label>
+							<input type="text" class="form-control" id="discount_code" placeholder="Enter discount code">
+						</div>
+					</div> 					  
+					<br><br>			   
+		            <div class="form-group ">
+		              <label for="c_order_notes" class="text-black">Notes</label>
+		              <textarea name="c_order_notes" id="c_order_notes" cols="30" rows="5" class="form-control" placeholder="Write your notes here..."></textarea>
+		            </div>
+					<br>  
+		            <div class="form-group text-center">
+		              <input type="button" value="Calculate" id="btnDisCal" class="btn btn-primary btn-md">
+		            </div>
+		          </div>
+		        </div>
+		        <div class="col-md-6">
+		          <div class="row mb-5">
+		            <div class="col-md-12">
+		              <h2 class="h3 mb-3 text-black">Your Booking</h2>
+		              <div class="p-3 p-lg-5 border bg-white">
+		                <table class="table site-block-order-table mb-5">
+		                  <thead>
+		                    <th>Package tour</th>
+		                    <th>Amount</th>
+		                  </thead>
+		                  <tbody>
+		                    <tr>
+		                      <td><span class="mx-2" id="show1">Package tour</span></td>
+		                      <td><span id="show2">00</span></td>
+		                    </tr>
+		                    <tr>
+		                    <tr>
+		                      <td>Discount</td>
+		                      <td><span id="show3">00 THB</span></td>
+								
+		                    </tr>
+		                    <tr>
+		                      <td class="text-black font-weight-bold"><strong> Total</strong></td>
+		                      <td class="text-black font-weight-bold"><span id="show4"><strong>00 THB</strong></span></td>
+		                    </tr>							  
+		                  </tbody>
+		                </table>
+						  
+					<fieldset class="row mb-3">
+						<div class="border p-3 mb-3">
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+								<label class="form-check-label" for="gridRadios1">    
+									<h3 class="h6 mb-0"><a class="d-block" data-bs-toggle="collapse" href="#collapsecheque1" role="button" aria-expanded="false" aria-controls="collapsecheque1">Mobile Banking</a></h3>
+									<div class="collapse" id="collapsecheque1">
+										<div class="py-1">
+											<p class="mb-0">Kasikorn Bank<br>Account Name : JourneyBookers <br>Account Number : 018-1-44940-3</p>
+										</div>
+									</div>
+								</label>
+							</div>
+						</div>
+
+						<div class="border p-3 mb-3">
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+								<label class="form-check-label" for="gridRadios2">    
+									<h3 class="h6 mb-0"><a class="d-block" data-bs-toggle="collapse" href="#collapsecheque2" role="button" aria-expanded="false" aria-controls="collapsecheque2">PromptPay</a></h3>
+									<div class="collapse" id="collapsecheque2">
+										<div class="py-2">
+											<p class="mb-0">Account Name : JourneyBookers<br>Account Number : 018-1-44940-3</p>
+										</div>
+									</div>
+								</label>
+							</div>
+						</div>
+
+						<div class="border p-3 mb-3">
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+								<label class="form-check-label" for="gridRadios3">    
+									<h3 class="h6 mb-0"><a class="d-block" data-bs-toggle="collapse" href="#collapsecheque3" role="button" aria-expanded="false" aria-controls="collapsecheque3">Credit Card</a></h3>
+									<div class="collapse" id="collapsecheque3">
+										<div class="py-3">
+											<form class="row g-3 needs-validation" novalidate>
+											  <div class="col-md-6 position-relative">
+												<label for="validationTooltip01" class="form-label">First name</label>
+												<input type="text" class="form-control" id="validationTooltip01" required>
+												<div class="valid-tooltip">
+												  Please enter your first name.
+												</div>
+											  </div>
+											  <div class="col-md-6 position-relative">
+												<label for="validationTooltip02" class="form-label">Last name</label>
+												<input type="text" class="form-control" id="validationTooltip02" required>
+												<div class="valid-tooltip">
+												  Please enter your last name.
+												</div>
+											  </div>
+											  <div class="col-md-12 position-relative">
+												<label for="validationTooltip02" class="form-label">Credit Card Number</label>
+												<input type="text" class="form-control" id="validationTooltip02" required>
+												<div class="valid-tooltip">
+												  Please enter your credit card number.
+												</div>
+											  </div>	
+											  <div class="col-md-6 position-relative">
+												<label for="validationTooltip03" class="form-label">Expiration</label>
+												<input type="text" class="form-control" id="validationTooltip03" required>
+												<div class="invalid-tooltip">
+												  Please provide a valid expiration.
+												</div>
+											  </div>
+											  <div class="col-md-6 position-relative">
+												<label for="validationTooltip05" class="form-label">CVV</label>
+												<input type="text" class="form-control" id="validationTooltip05" required>
+												<div class="invalid-tooltip">
+												  Please provide a valid cvv.
+												</div>
+											  </div>
+											</form>											
+										</div>
+									</div>
+								</label>
+							</div>
+						</div>
+
+						<div class="mb-3">
+						  <label for="formFileMultiple" class="form-label">Please attach the transfer receipt here.</label>
+						  <input class="form-control" type="file" id="formFileMultiple" multiple>
+						</div>
+					</fieldset>
+
+								
+		                <div class="form-group">
+		                  <button class="btn btn-black btn-lg py-3 btn-block" onclick="window.location='thankyou.html'">Place Order</button>
+		                </div>
+
+		              </div>
+		            </div>
+		          </div>
+
+		        </div>
+		      </div>
+		      <!-- </form> -->
+		    </div>
+		  </div>
+
+		<!-- Start Footer Section -->
+		<footer class="footer-section">
+			<div class="container relative">
+
+				<div class="sofa-img">
+					<img src="images/web03.png" alt="Image" class="img-fluid">
+				</div>
+
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="subscription-form">
+							<h3 class="d-flex align-items-center"><span class="me-1"><img src="images/envelope-outline.svg" alt="Image" class="img-fluid"></span><span>Subscribe to Newsletter</span></h3>
+
+							<form action="#" class="row g-3">
+								<div class="col-auto">
+									<input type="text" class="form-control" placeholder="Enter your name">
+								</div>
+								<div class="col-auto">
+									<input type="email" class="form-control" placeholder="Enter your email">
+								</div>
+								<div class="col-auto">
+									<button class = "btn btn-primary" onClick = "saveData()">
+										<span class="fa fa-paper-plane"></span>
+									</button>
+								</div>
+							</form>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="row g-5 mb-5">
+					<div class="col-lg-4">
+						<div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">JourneyBookers<span>.</span></a></div>
+						<p class="mb-4">Book your dream vacations hassle-free with JourneyBookers, where every trip is an adventure waiting to happen.</p>
+
+						<ul class="list-unstyled custom-social">
+							<li><a href="https://www.facebook.com/"><span class="fa fa-brands fa-facebook-f"></span></a></li>
+							<li><a href="https://twitter.com/?lang=en"><span class="fa fa-brands fa-twitter"></span></a></li>
+							<li><a href="https://www.instagram.com/"><span class="fa fa-brands fa-instagram"></span></a></li>
+							<li><a href="https://www.linkedin.com/"><span class="fa fa-brands fa-linkedin"></span></a></li>
+						</ul>
+					</div>
+
+					<div class="col-lg-8">
+						<div class="row links-wrap">
+							<div class="col-6 col-sm-6 col-md-3">
+								<ul class="list-unstyled">
+									<li><a href="index.html"></a></li>
+								</ul>
+							</div>
+
+							<div class="col-6 col-sm-6 col-md-3">
+								<ul class="list-unstyled">
+									<li><a href="about.html">About us</a></li>
+								</ul>
+							</div>
+
+							<div class="col-6 col-sm-6 col-md-3">
+								<ul class="list-unstyled">
+									<li><a href="services.html">Services</a></li>
+								</ul>
+							</div>
+
+							<div class="col-6 col-sm-6 col-md-3">
+								<ul class="list-unstyled">
+									<li><a href="contact.html">Contact us</a></li>
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</footer>
+		<!-- End Footer Section -->	
+
+
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script src="js/tiny-slider.js"></script>
+		<script src="js/custom.js"></script>
+	</body>
+
+</html>

@@ -3,7 +3,7 @@ name: Deploy Frontend to Azure
 on:
   push:
     branches:
-      - main  # หรือเปลี่ยนชื่อ branch ที่ใช้
+      - main
 
 jobs:
   deploy:
